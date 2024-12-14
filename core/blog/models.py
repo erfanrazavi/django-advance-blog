@@ -14,7 +14,7 @@ class Post(models.Model):
     image = models.ImageField(null=True , blank=True)
     title = models.CharField(max_length=250)
     content = models.TextField()
-    stauts = models.BooleanField()
+    status = models.BooleanField()
     category = models.ForeignKey('Category' , on_delete=models.SET_NULL , null=True)
     '''
     We put the category in a string because we wanted to define it after this class.
@@ -29,4 +29,7 @@ class Post(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
     
