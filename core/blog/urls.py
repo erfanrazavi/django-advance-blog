@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import indexView
-from django.views.generic import TemplateView
+from .views import *
+from django.views.generic import TemplateView , RedirectView
 
+app_name = "blog"
 
 urlpatterns = [
-    path('fcb', indexView , name='FBV-test'),
-    path("cbv", TemplateView.as_view(template_name="index.html")),
-
+    path("cbv", IndexView.as_view(),name='cbv-i'),
+    path("go-to-google", RedirectToGoogle.as_view(), name="redirect-google"),
 ]
