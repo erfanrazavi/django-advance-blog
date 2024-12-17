@@ -11,9 +11,12 @@
         Hello {{name}}
     </h1>
     <p>
-        {{posts}}
+        {% for post  in posts %}
+            {{post.title}}<br>
+        {% endfor %}
+        
     </p>
-    <a href="{% url "blog:go-to-index" %}">redirect to cbv</a>
+    {% comment %} <a href="{% url "blog:go-to-index" %}">redirect to cbv</a> {% endcomment %}
 
 </body>
 </html>
