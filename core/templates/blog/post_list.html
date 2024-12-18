@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
+    <a href='{% url "blog:post-create" %}'>
+        <h1> CREATE POST </h1>   
+</a><hr>
+<br>
     {% comment %} <h1>
 
         hello world <br>
@@ -26,7 +30,13 @@
         {% for post  in posts %}
         <li>
             <h2>
-                {{post.title}}
+              <a href="{% url "blog:post-detail" pk=post.id %}"> {{post.title}}  -  Post-ID:{{post.id}} </a>
+              <a href='{% url "blog:post-edit" pk=post.id %}'>
+                    <h5> EDIT IT </h5>   
+            </a>
+              <a href='{% url "blog:post-delete" pk=post.id %}'>
+                    <h5> DELETE IT </h5>   
+            </a>
                 </h2>
                 <p>{{post.content}} , {{post.created_date|date:"D d M Y"}}</p>
         </li>
@@ -56,6 +66,9 @@
         {% endif %}
     </span>
 </div>
+
+
+
 
 </body>
 </html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>delete post</title>
+</head>
+<body>
+    <h2>آیا مطمئن هستید که می‌خواهید این پست را حذف کنید؟</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">بله، حذف کن</button>
+    <a href="{% url 'blog:list-cbv' %}">خیر، بازگشت به لیست پست‌ها</a>
+</form>
+</body>
+</html>
