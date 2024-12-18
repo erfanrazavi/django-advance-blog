@@ -3,7 +3,7 @@ from django.contrib.auth.models import (BaseUserManager , AbstractBaseUser , Per
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+# 
 
 class UserManager(BaseUserManager):
     '''
@@ -69,11 +69,11 @@ class User(AbstractBaseUser , PermissionsMixin):
         return self.email
 
 class Profile(models.Model):
-    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    user = models.OneToOneField(User , on_delete=models.CASCADE , related_name='profile')
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     image = models.ImageField(blank=True , null=True)
-    descibtion = models.TextField()
+    description = models.TextField()
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
