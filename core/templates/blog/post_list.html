@@ -38,7 +38,7 @@
                     <h5> DELETE IT </h5>   
             </a>
                 </h2>
-                <p>{{post.content}} , {{post.created_date|date:"D d M Y"}}</p>
+                <p>{{post.author.first_name}} {{post.author.last_name}} , {{post.created_date|date:"D d M Y"}}</p>
         </li>
         {% endfor %}
     </ol>

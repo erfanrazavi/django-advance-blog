@@ -26,6 +26,7 @@ class PostList( ListView):
     queryset = Post.objects.all()
     context_object_name = 'posts'
     ordering = '-id'
+    # paginate_by = 2
     
 from django.utils import timezone
 
@@ -61,7 +62,8 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     # fields = ( 'title' , 'content' , 'status' , 'category',)
     success_url = '/blog/post/'
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        profile = self.request.user.profile
+        form.instance.author = profile
         return super().form_valid(form)
     
 class PostUpdateView(LoginRequiredMixin,UpdateView):

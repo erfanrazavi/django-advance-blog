@@ -69,11 +69,11 @@ class User(AbstractBaseUser , PermissionsMixin):
         return self.email
 
 class Profile(models.Model):
-    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    user = models.OneToOneField(User , on_delete=models.CASCADE)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     image = models.ImageField(blank=True , null=True)
-    descibtion = models.TextField()
+    description = models.TextField()
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
