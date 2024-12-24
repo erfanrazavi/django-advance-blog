@@ -75,3 +75,7 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
     template_name = 'blog/post_confirm_delete.html'
     success_url = '/blog/post'
 
+
+#API
+
+

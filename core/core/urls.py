@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('api/', include('rest_framework.urls'))
 ]
 #serving static and media for development
 if settings.DEBUG:
