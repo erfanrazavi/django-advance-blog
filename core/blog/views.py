@@ -4,8 +4,9 @@ from django.views.generic import ListView , DetailView ,  FormView , CreateView 
 from .forms import PostForm
 from .models import Post
 from django.shortcuts import get_object_or_404
-
 from django.contrib.auth.mixins import LoginRequiredMixin
+# from rest_framework.response import Response
+# from rest_framework.decorators import api_view
 
 # Create your views here.
 
@@ -77,5 +78,9 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
 
 
 #API
+
+# @api_view()
+# def hello_world(request):
+#     return Response({'message' : 'Hello World'})
 
 
