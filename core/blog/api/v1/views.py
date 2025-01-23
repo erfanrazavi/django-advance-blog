@@ -7,19 +7,44 @@ from .serializers import PostSerializer
 from ...models import Post
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 
+'''
 @api_view(['GET' , 'POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def postList(request):
     if request.method == 'GET':
         posts = Post.objects.filter(status =True)
-        serializer = PostSerializer(posts,many = True)
+        serializer = PostSerializer(posts,many = True) # many for serializing a list or querysets
         return Response(serializer.data)
     elif request.method == 'POST':
-        serializer = PostSerializer(data = request.data)
+        serializer = PostSerializer(data = request.data) # received data from http requests to server
         serializer.is_valid(raise_exception=True)
         serializer.save()    
         return Response(serializer.data)
+'''    
+class PostList(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    '''getting a list of posts and creating new post'''
+    def get(self , request):
+        '''retrieving a list of post'''
+        posts = Post.objects.filter(status =True)
+        serializer = PostSerializer(posts,many = True) # many for serializing a list or querysets
+        return Response(serializer.data)
+    
+    def post(self , request):
+        '''creating a post with provided data'''
+        serializer = PostSerializer(data = request.data) # received data from http requests to server
+        serializer.is_valid(raise_exception=True)
+        serializer.save()    
+        return Response(serializer.data)
+    
+
+
+
+
+
 @api_view(["GET" , "PUT" , 'DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def postDetail(request , id):
