@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'blog',
     'rest_framework',
+    'django_filters',
     
     
 ]
@@ -150,3 +151,13 @@ AUTH_USER_MODEL = 'accounts.User'
 #         'rest_framework.permissions.IsAuthenticated',
 #     ]
 # } 
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+#pagination viewSet setting
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
