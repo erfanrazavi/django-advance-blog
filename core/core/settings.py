@@ -164,3 +164,20 @@ REST_FRAMEWORK = {
 
     
 }
+
+#SETTING OF SIMPLE JWT  
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'HS256',  # الگوریتم امضای توکن
+    'SIGNING_KEY': SECRET_KEY,  # کلید مخفی برای امضای توکن
+    'USER_ID_FIELD': 'pk',  # فیلدی که برای شناسایی کاربر در توکن استفاده می‌شود
+    'USER_ID_CLAIM': 'user_id',  # کلید سفارشی برای ذخیره شناسه کاربر در Payload
+    # 'AUTH_HEADER_TYPES': ('Bearer',),  # نوع هدر احراز هویت (به طور پیش‌فرض Bearer است)
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=7),  # مدت زمان انقضا توکن دسترسی
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=8),  # مدت زمان انقضا توکن بازنشانی
+    'ROTATE_REFRESH_TOKENS': True,  # چرخش توکن‌های بازنشانی
+    'BLACKLIST_AFTER_ROTATION': True,  # سیاه‌لیست کردن توکن‌های بازنشانی پس از چرخش
+    'UPDATE_LAST_LOGIN': True,  # به‌روزرسانی زمان آخرین ورود کاربر
+}
+
