@@ -1,5 +1,11 @@
 from rest_framework import generics
-from .serializers import RegistrationSerializer , CustomAuthTokenSerializer , CustomTokenObtainPairSerializer  , ChangePasswordSerializer
+
+from .serializers import (RegistrationSerializer ,
+                           CustomAuthTokenSerializer ,
+                             CustomTokenObtainPairSerializer ,
+                               ChangePasswordSerializer ,
+                                 ProfileSerializer ,)
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -8,7 +14,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-
+from ...models import Profile
+from django.shortcuts import get_object_or_404
 
 class RegistrationApiView(generics.GenericAPIView):
     serializer_class = RegistrationSerializer
@@ -77,3 +84,13 @@ class ChangePasswordApiView(generics.GenericAPIView):
             }
             return Response(response)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ProfileApiView(generics.RetrieveAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset , user=self.request.user)
+        return obj
+    
