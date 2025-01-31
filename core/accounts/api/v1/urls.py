@@ -2,6 +2,7 @@ from django.urls import path , include
 from .views import *
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView , TokenVerifyView
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
 
 
 
@@ -27,6 +28,11 @@ urlpatterns = [
     path('jwt/verify/' , TokenVerifyView.as_view() , name="jwt-verify"),
 
     #profile
-    path('profile' , ProfileApiView.as_view() , name = 'profile'),
+    path('profile/' , ProfileApiView.as_view() , name = 'profile'),
+
+    #swagger
+
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('docs/', SpectacularRedocView.as_view(url_name='schema'), name='docs'),
     
 ]   
