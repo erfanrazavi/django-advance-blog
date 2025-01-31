@@ -167,7 +167,7 @@ REST_FRAMEWORK = {
 
     
 }
-# DRF_SPECTACULAR SETTINGS
+#  DRF_SPECTACULAR SETTINGS
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Your Project API',
     'DESCRIPTION': 'Your project description',
