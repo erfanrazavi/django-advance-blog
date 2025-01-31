@@ -4,7 +4,8 @@ from .serializers import (RegistrationSerializer ,
                            CustomAuthTokenSerializer ,
                              CustomTokenObtainPairSerializer ,
                                ChangePasswordSerializer ,
-                                 ProfileSerializer ,)
+                                 ProfileSerializer ,
+                                    )
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -14,7 +15,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
-from ...models import Profile
+from ...models import Profile 
 from django.shortcuts import get_object_or_404
 
 class RegistrationApiView(generics.GenericAPIView):
@@ -93,4 +94,3 @@ class ProfileApiView(generics.RetrieveAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset , user=self.request.user)
         return obj
-    
