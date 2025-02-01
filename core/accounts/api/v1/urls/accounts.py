@@ -12,9 +12,9 @@ urlpatterns = [
     
     #activation
     path('test-email/' , TestEmailApiView.as_view() , name = 'test-email'),
-    # path("activation/confirm" , ActivationApiView.as_view() , name="activation"),
+    path("activation/confirm/<str:token>" , ActivationApiView.as_view() , name="activation"),
     #resend activation
-    # path("activation/resend" , ActivationApiView.as_view() , name="activation"),
+    path("activation/resend" , ActivationResendApiView.as_view() , name="activation-resend"),
 
     
     #change password

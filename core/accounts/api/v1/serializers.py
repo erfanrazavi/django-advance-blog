@@ -5,7 +5,7 @@ from  django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
+from django.shortcuts import get_object_or_404
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -106,6 +106,27 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Profile
         fields = ['id' , 'email', 'first_name' , 'last_name' , 'description' , 'image' ]
+
+class ActivationResendSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        
+        print(attrs)
+        try:
+            user_obj = get_object_or_404(User , email=email)
+        except User.DoesNotExist:
+            raise serializers.ValidationError({'detail' : 'email of User does not exist'})
+        attrs['user'] = user_obj
+        
+        if user_obj.is_verified:
+            raise serializers.ValidationError({'detail' : 'User is already verified :))))))'})
+        
+        return super().validate(attrs)
+    
+
+    
 
 
     
