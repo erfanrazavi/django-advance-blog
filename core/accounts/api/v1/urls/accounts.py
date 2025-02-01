@@ -4,11 +4,18 @@ from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
 
 
-
+import django.core.mail
 
 urlpatterns = [
     #registration
     path("registration/" , RegistrationApiView.as_view() , name="registration"),
+    
+    #activation
+    path('test-email/' , TestEmailApiView.as_view() , name = 'test-email'),
+    # path("activation/confirm" , ActivationApiView.as_view() , name="activation"),
+    #resend activation
+    # path("activation/resend" , ActivationApiView.as_view() , name="activation"),
+
     
     #change password
     path('change-password/' , ChangePasswordApiView.as_view() , name = 'change-password'),

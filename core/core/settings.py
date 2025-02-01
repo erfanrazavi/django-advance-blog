@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'drf_spectacular',
+    'mail_templated',
 
     
     
@@ -191,4 +192,14 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,  # سیاه‌لیست کردن توکن‌های بازنشانی پس از چرخش
     'UPDATE_LAST_LOGIN': True,  # به‌روزرسانی زمان آخرین ورود کاربر
 }
+
+# email configuration
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp4dev'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 25 
+
 
