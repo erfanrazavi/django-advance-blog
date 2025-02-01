@@ -18,7 +18,8 @@ from django.contrib.auth.models import User
 from ...models import Profile 
 from django.shortcuts import get_object_or_404
 # from django.core.mail import send_mail
-from mail_templated import send_mail
+from mail_templated import send_mail , EmailMessage
+from ..utils import EmailThread
 
 class RegistrationApiView(generics.GenericAPIView):
     serializer_class = RegistrationSerializer
@@ -99,8 +100,9 @@ class ProfileApiView(generics.RetrieveAPIView):
     
 class TestEmailApiView(generics.GenericAPIView):
     def get(self , request , *args , **kwargs):
-
+        email_obj = EmailMessage('email/hello.tpl', {'name': 'erfan'}, 'erfan6235@gmail.com', to = ['erfanr926@gmail.com'])
         # send_mail('email/hello.tpl', {'user': self.user}, self.from_email, [self.user.email])
-        send_mail('email/hello.tpl', {'name': 'erfan'}, 'erfan6235@gmail.com', ['erfanr926@gmail.com'])
+        EmailThread(email_obj).start()
+        
 
-        return Response({'message' : 'Email Sent'}, status = status.HTTP_200_OK)
+        return Response('Email Sent')
