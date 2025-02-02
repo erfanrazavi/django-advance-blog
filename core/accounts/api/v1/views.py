@@ -5,7 +5,9 @@ from .serializers import (RegistrationSerializer ,
                              CustomTokenObtainPairSerializer ,
                                ChangePasswordSerializer ,
                                  ProfileSerializer ,
-                                        ActivationResendSerializer,  )
+                                        ActivationResendSerializer,
+                                          ResetPasswordApiSerializer, 
+                                          ResetPasswordConfirmApiSerializer, )
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -177,6 +179,55 @@ class ActivationResendApiView(generics.GenericAPIView):
     def get_tokens_for_user(self , user):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
+
+
+class ResetPasswordApiView(generics.GenericAPIView):
+    serializer_class = ResetPasswordApiSerializer
+
+    def post(self , request , *args , **kwargs):
+        serializer = ResetPasswordApiSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        user_obj = serializer.validated_data['user']
+        token = self.get_tokens_for_user(user_obj)
+        email_obj = EmailMessage('email/reset_password.tpl', {'token': token}, to = [user_obj.email])
+        EmailThread(email_obj).start()
+        return Response({'detail' : 'successfully sent to your email , please check your email!'}, status = status.HTTP_200_OK)
+
+    def get_tokens_for_user(self , user):
+        refresh = RefreshToken.for_user(user)
+        return str(refresh.access_token)
+    
+class ResetPasswordConfirmApiView(generics.GenericAPIView):
+    serializer_class = ResetPasswordConfirmApiSerializer
+
+    def post(self , request , token , *args , **kwargs):
+        try:
+            decoder = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+            user_id = decoder['user_id']
+        except ExpiredSignatureError:
+            return Response({'error': 'Token is expired'}, status=status.HTTP_400_BAD_REQUEST)
+        except DecodeError:
+            return Response({'error': 'Token is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+        except InvalidTokenError:
+            return Response({'error': 'Token is invalid'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user_obj = get_object_or_404(User, id=user_id)
+
+      
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+       
+        user_obj.set_password(serializer.validated_data['new_password'])
+        user_obj.save()
+
+        return Response({'message': 'Your password has been reset successfully'}, status=status.HTTP_200_OK)
+
+    
+
+        
+        
+    
    
         
 
