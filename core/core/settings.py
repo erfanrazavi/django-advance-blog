@@ -23,7 +23,9 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS", default="*", cast=lambda v: [s.strip() for s in v.split(",")]
+    "ALLOWED_HOSTS",
+    default="*",
+    cast=lambda v: [s.strip() for s in v.split(",")],
 )
 
 
@@ -185,7 +187,9 @@ SIMPLE_JWT = {
     "USER_ID_CLAIM": "user_id",  # کلید سفارشی برای ذخیره شناسه کاربر در Payload
     # 'AUTH_HEADER_TYPES': ('Bearer',),  # نوع هدر احراز هویت (به طور پیش‌فرض Bearer است)
     "ACCESS_TOKEN_LIFETIME": timedelta(days=7),  # مدت زمان انقضا توکن دسترسی
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=8),  # مدت زمان انقضا توکن بازنشانی
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=8
+    ),  # مدت زمان انقضا توکن بازنشانی
     "ROTATE_REFRESH_TOKENS": True,  # چرخش توکن‌های بازنشانی
     "BLACKLIST_AFTER_ROTATION": True,  # سیاه‌لیست کردن توکن‌های بازنشانی پس از چرخش
     "UPDATE_LAST_LOGIN": True,  # به‌روزرسانی زمان آخرین ورود کاربر

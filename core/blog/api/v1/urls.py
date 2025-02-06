@@ -1,5 +1,4 @@
-from django.urls import path, include
-from blog.api.v1.views import *
+from blog.api.v1.views import PostModelViewSet, CategoryModelViewSet
 from rest_framework.routers import DefaultRouter
 
 

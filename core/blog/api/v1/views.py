@@ -1,20 +1,14 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 from rest_framework import viewsets
-from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-
 
 from .paginations import DefaultPagination
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
 from .permissions import IsOwnerOrReadOnly
-
-
-"""
-@api_view(['GET' , 'POST'])
+"""@api_view(['GET' , 'POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def postList(request):
     if request.method == 'GET':
@@ -25,12 +19,8 @@ def postList(request):
         serializer = PostSerializer(data = request.data) # received data from http requests to server
         serializer.is_valid(raise_exception=True)
         serializer.save()    
-        return Response(serializer.data)
-"""
-
-
-"""
-    class PostList(APIView):
+        return Response(serializer.data)"""
+"""class PostList(APIView):
         permission_classes = [IsAuthenticatedOrReadOnly]
         serializer_class = PostSerializer
         '''getting a list of posts and creating new post'''
@@ -45,23 +35,18 @@ def postList(request):
             serializer = PostSerializer(data = request.data) # received data from http requests to server
             serializer.is_valid(raise_exception=True)
             serializer.save()    
-            return Response(serializer.data)
-"""
-
+            return Response(serializer.data)"""
 """class PostList(ListCreateAPIView):
 
     '''getting a list of posts and creating new post'''
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status =True)"""
-
-
 """@api_view(["GET" , "PUT" , 'DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def postDetail(request , id):
    post = get_object_or_404(Post,pk=id , status =True)
-   if request.method == 'GET':
-        
+   if request.method == 'GET':     
         serialize = PostSerializer(post)
         return Response(serialize.data)
    elif request.method == "PUT":
@@ -71,11 +56,8 @@ def postDetail(request , id):
        return Response(serialize.data)
    elif request.method == 'DELETE':
        post.delete()
-       return Response({'detail' : 'Item removed successfully'},status=status.HTTP_204_NO_CONTENT)   """
-
-
-"""
-    class PostDetail(APIView):
+       return Response({'detail' : 'Item removed successfully'},status=status.HTTP_204_NO_CONTENT)"""
+"""class PostDetail(APIView):
         ''' getting detail of the post and edit plus removing it '''
         permission_classes = [IsAuthenticatedOrReadOnly]
         serializer_class = PostSerializer
@@ -101,18 +83,13 @@ def postDetail(request , id):
             
             post = get_object_or_404(Post,pk=id , status =True)
             post.delete()
-            return Response({'detail' : 'Item removed successfully'},status=status.HTTP_204_NO_CONTENT)
-"""
-
-
+            return Response({'detail' : 'Item removed successfully'},status=status.HTTP_204_NO_CONTENT)"""
 """class PostDetail(RetrieveUpdateDestroyAPIView):
     ''' getting detail of the post and edit plus removing it '''
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     lookup_field = 'id'
     queryset = Post.objects.filter(status =True)"""
-
-
 """class PostViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
@@ -137,18 +114,14 @@ def postDetail(request , id):
             serialize.is_valid(raise_exception=True)
             serialize.save()
             return Response(serialize.data)
-
     def partial_update(self, request, pk=None):
         pass
-
     def destroy(self, request, pk=None):
         pass"""
-
-
 class PostModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
-    # lookup_field = 'id'
+    # lookup_field='id'
     queryset = Post.objects.filter(status=True)
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = {

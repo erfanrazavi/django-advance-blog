@@ -13,7 +13,9 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
     status = models.BooleanField()
-    category = models.ForeignKey("Category", on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(
+        "Category", on_delete=models.SET_NULL, null=True
+    )
     """
     We put the category in a string because we wanted to define it after this class.
     If it wasn't in a string, the Category class would need to be defined before the Post class.
