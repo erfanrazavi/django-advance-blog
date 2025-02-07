@@ -17,10 +17,10 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY",default='test')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool)
+DEBUG = config("DEBUG", cast=bool,default=True)
 
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
