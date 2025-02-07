@@ -5,12 +5,13 @@ from .views import (
     PostDetailView,
     PostCreateView,
     PostUpdateView,
+    IndexView,
 )
 
 app_name = "blog"
 
 urlpatterns = [
-    #     # path("cbv", IndexView.as_view(),name='cbv-i'),
+    path("cbv", IndexView.as_view(),name='cbv-i'),
     path("post/", PostList.as_view(), name="list-cbv"),
     #     # path("go-to-google", RedirectToGoogle.as_view(), name="redirect-google"),
     path("post/<int:pk>/", PostDetailView.as_view(), name="post-detail"),

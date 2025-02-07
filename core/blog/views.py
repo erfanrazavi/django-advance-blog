@@ -4,6 +4,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView,
+    TemplateView,
 )
 from django.utils import timezone
 from .forms import PostForm
@@ -13,16 +14,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 # Create your views here.
-# class IndexView(TemplateView):
-#     '''
-#         a class based view to show index page
-#     '''
-#     template_name = 'index.html'
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["name"] = 'erf'
-#         context['posts'] = Post.objects.all()
-#         return context
+class IndexView(TemplateView):
+    '''
+        a class based view to show index page
+    '''
+    template_name = 'index.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["name"] = 'erf'
+        context['posts'] = Post.objects.all()
+        return context
 
 class PostList(ListView):
     queryset = Post.objects.all()
