@@ -17,10 +17,10 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = config("SECRET_KEY",default='test')
+SECRET_KEY = config("SECRET_KEY", default="test")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool,default=True)
+DEBUG = config("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS",
@@ -187,9 +187,7 @@ SIMPLE_JWT = {
     "USER_ID_CLAIM": "user_id",  # کلید سفارشی برای ذخیره شناسه کاربر در Payload
     # 'AUTH_HEADER_TYPES': ('Bearer',),  # نوع هدر احراز هویت (به طور پیش‌فرض Bearer است)
     "ACCESS_TOKEN_LIFETIME": timedelta(days=7),  # مدت زمان انقضا توکن دسترسی
-    "REFRESH_TOKEN_LIFETIME": timedelta(
-        days=8
-    ),  # مدت زمان انقضا توکن بازنشانی
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=8),  # مدت زمان انقضا توکن بازنشانی
     "ROTATE_REFRESH_TOKENS": True,  # چرخش توکن‌های بازنشانی
     "BLACKLIST_AFTER_ROTATION": True,  # سیاه‌لیست کردن توکن‌های بازنشانی پس از چرخش
     "UPDATE_LAST_LOGIN": True,  # به‌روزرسانی زمان آخرین ورود کاربر
