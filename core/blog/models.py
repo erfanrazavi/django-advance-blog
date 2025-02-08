@@ -15,8 +15,10 @@ class Post(models.Model):
     status = models.BooleanField()
     category = models.ForeignKey("Category", on_delete=models.SET_NULL, null=True)
     """
-    We put the category in a string because we wanted to define it after this class.
-    If it wasn't in a string, the Category class would need to be defined before the Post class.
+    We put the category in a string because
+    we wanted to define it after this class.
+    If it wasn't in a string, the Category
+    class would need to be defined before the Post class.
     """
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now_add=True)

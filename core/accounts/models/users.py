@@ -57,9 +57,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = (
-        []
-    )  # When I want a field to be required, I write the name of that variable here
+    REQUIRED_FIELDS = []  # When I want a field to be required,
+    # I write the name of that variable here
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now_add=True)

@@ -57,7 +57,6 @@ class RegistrationApiView(generics.GenericAPIView):
                 "erfan6235@gmail.com",
                 to=[email],
             )
-            # send_mail('email/hello.tpl', {'user': self.user}, self.from_email, [self.user.email])
             EmailThread(email_obj).start()
 
             return Response(data, status=status.HTTP_201_CREATED)
@@ -147,7 +146,6 @@ class TestEmailApiView(generics.GenericAPIView):
             "erfan6235@gmail.com",
             to=[self.email],
         )
-        # send_mail('email/hello.tpl', {'user': self.user}, self.from_email, [self.user.email])
         EmailThread(email_obj).start()
         return Response("email sent")
 
@@ -196,7 +194,7 @@ class ActivationResendApiView(generics.GenericAPIView):
         )
         EmailThread(email_obj).start()
         return Response(
-            {"detail": "successfully sent to your email , please check your email1!"},
+            {"detail": "successfully sent to your email,please check your email1!"},
             status=status.HTTP_200_OK,
         )
 
@@ -218,7 +216,7 @@ class ResetPasswordApiView(generics.GenericAPIView):
         )
         EmailThread(email_obj).start()
         return Response(
-            {"detail": "successfully sent to your email , please check your email!"},
+            {"detail": "successfully sent to your email,please check your email!"},
             status=status.HTTP_200_OK,
         )
 

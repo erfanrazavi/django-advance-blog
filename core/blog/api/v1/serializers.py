@@ -52,7 +52,8 @@ class PostSerializer(serializers.ModelSerializer):
             rep.pop("content", None)
         rep["category"] = CategorySerializer(
             instance.category, context={"request": request}
-        ).data  # When we want to call the serializer elsewhere, we pass the request along with it
+        ).data  # When we want to call the serializer elsewhere,
+        # we pass the request along with it
 
         return rep
 

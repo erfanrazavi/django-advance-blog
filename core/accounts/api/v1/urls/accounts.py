@@ -20,16 +20,28 @@ urlpatterns = [
     # activation
     path("test-email/", TestEmailApiView.as_view(), name="test-email"),
     path(
-        "activation/confirm/<str:token>", ActivationApiView.as_view(), name="activation"
+        "activation/confirm/<str:token>",
+        ActivationApiView.as_view(),
+        name="activation",
     ),
     # resend activation
     path(
-        "activation/resend", ActivationResendApiView.as_view(), name="activation-resend"
+        "activation/resend",
+        ActivationResendApiView.as_view(),
+        name="activation-resend",
     ),
     # change password
-    path("change-password/", ChangePasswordApiView.as_view(), name="change-password"),
+    path(
+        "change-password/",
+        ChangePasswordApiView.as_view(),
+        name="change-password",
+    ),
     # reset password
-    path("reset-password/", ResetPasswordApiView.as_view(), name="reset-password"),
+    path(
+        "reset-password/",
+        ResetPasswordApiView.as_view(),
+        name="reset-password",
+    ),
     path(
         "reset-password/confirm/<str:token>/",
         ResetPasswordConfirmApiView.as_view(),

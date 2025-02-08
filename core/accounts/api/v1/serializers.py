@@ -29,8 +29,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
 
 
-#  This serializer is used to validate the email and password fields in the request data.
-#
+#  This serializer is used to validate
+# the email and password fields in the request data.
+
+
 class CustomAuthTokenSerializer(serializers.Serializer):
     email = serializers.CharField(label=_("Email"), write_only=True)
     password = serializers.CharField(

@@ -11,10 +11,21 @@ router.register("category", CategoryModelViewSet, basename="category")
 
 urlpatterns = router.urls
 
-# urlpatterns = [
-#    # path('post/' , PostList.as_view() , name='post-list' ),
-#    # path('post/<int:id>/' , postDetail , name='post-detail' ),
-#    # path('post/<int:id>/' , PostDetail.as_view() , name='post-detail' ),
-#    path('post/' , PostViewSet.as_view({'get' : 'list' , 'post':'create'}) , name='post-list' ),
-#    path('post/<int:pk>' , PostViewSet.as_view({'get' : 'retrieve' , 'put' : 'update' , 'patch' : 'partial_update' , 'delete':'destroy' }) , name='post-detail' ),
-# ]
+"""
+urlpatterns = [
+   path('post/' , PostList.as_view()
+     , name='post-list' ),
+   path('post/<int:id>/' , postDetail
+     , name='post-detail' ),
+   path('post/<int:id>/' , PostDetail.as_view()
+     , name='post-detail' ),
+   path('post/' ,
+   PostViewSet.as_view({'get' : 'list' , 'post':'create'})
+     , name='post-list' ),
+   path('post/<int:pk>' , 
+   PostViewSet.as_view({'get' : 'retrieve' , 'put'
+     : 'update' , 'patch'
+     : 'partial_update' , 'delete':'destroy'
+       }) , name='post-detail' ),
+]
+"""
