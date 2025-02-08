@@ -22,7 +22,7 @@ urlpatterns = [
    path('post/' ,
    PostViewSet.as_view({'get' : 'list' , 'post':'create'})
      , name='post-list' ),
-   path('post/<int:pk>' , 
+   path('post/<int:pk>' ,
    PostViewSet.as_view({'get' : 'retrieve' , 'put'
      : 'update' , 'patch'
      : 'partial_update' , 'delete':'destroy'
