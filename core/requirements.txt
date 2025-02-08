@@ -13,7 +13,7 @@ drf-yasg[validation]
 rest_framework_simplejwt 
 drf-spectacular
 djangorestframework-simplejwt
-
+djoser
 #deployment module
 
 
