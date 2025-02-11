@@ -33,7 +33,9 @@ class PostList(ListView):
     queryset = Post.objects.all()
     context_object_name = "posts"
     ordering = "-id"
-    # paginate_by = 2
+    # paginate_by = 2 
+
+
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
@@ -89,3 +91,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 # @api_view()
 # def hello_world(request):
 # return Response({'message' : 'Hello World'})
+
+
+class PostListApiView(TemplateView):
+    template_name = 'blog/post_list_api.html'
