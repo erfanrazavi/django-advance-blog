@@ -89,3 +89,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 # @api_view()
 # def hello_world(request):
 # return Response({'message' : 'Hello World'})
+
+
+class PostListApiView(TemplateView):
+    template_name = "blog/post_list_api.html"
