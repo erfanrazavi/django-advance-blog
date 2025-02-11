@@ -15,6 +15,7 @@ drf-spectacular
 djangorestframework-simplejwt
 djoser
 locust
+django-cors-headers
 
 #deployment module
 
