@@ -6,6 +6,7 @@ from .views import (
     PostCreateView,
     PostUpdateView,
     IndexView,
+    PostListApiView,
 )
 
 app_name = "blog"
@@ -13,6 +14,7 @@ app_name = "blog"
 urlpatterns = [
     path("cbv", IndexView.as_view(), name="cbv-i"),
     path("post/", PostList.as_view(), name="list-cbv"),
+    path("post/api/", PostListApiView.as_view(), name="api-list"),
     # path("go-to-google", RedirectToGoogle.as_view(), name="redirect-google"),
     path("post/<int:pk>/", PostDetailView.as_view(), name="post-detail"),
     path("post/create/", PostCreateView.as_view(), name="post-create"),
