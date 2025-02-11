@@ -5,11 +5,9 @@ from accounts.models import User, Profile
 from blog.models import Post, Category
 import random
 
-category_list = [
-    "IT",
-    "Design",
-    "Play"
-]
+category_list = ["IT", "Design", "Play"]
+
+
 class Command(BaseCommand):
     help = "inserting dummy data"
 
@@ -18,9 +16,7 @@ class Command(BaseCommand):
         self.fake = Faker()
 
     def handle(self, *args, **options):
-        user = User.objects.create_user(
-            email=self.fake.email(), password='Pass@123456'
-            )
+        user = User.objects.create_user(email=self.fake.email(), password="Pass@123456")
         profile = Profile.objects.get(user=user)
         profile.first_name = self.fake.first_name()
         profile.last_name = self.fake.last_name()
@@ -29,13 +25,13 @@ class Command(BaseCommand):
 
         for name in category_list:
             Category.objects.get_or_create(name=name)
-        
+
         for _ in range(10):
             Post.objects.create(
-                author = profile,
-                title = self.fake.word().title(),
-                content = self.fake.paragraph(nb_sentences=10),
-                status = random.choice((True, False)),
-                category = Category.objects.get(name=random.choice(category_list)),
-                published_date = datetime.now()
+                author=profile,
+                title=self.fake.word().title(),
+                content=self.fake.paragraph(nb_sentences=10),
+                status=random.choice((True, False)),
+                category=Category.objects.get(name=random.choice(category_list)),
+                published_date=datetime.now(),
             )
