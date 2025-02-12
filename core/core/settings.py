@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "corsheaders",
-]
+    "django_celery_beat",
+]   
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -207,3 +208,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Celery conf
 
 CELERY_BROKER_URL = 'redis://redis:6379/1'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/1'    
+
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_IGNORE_RESULT = False
