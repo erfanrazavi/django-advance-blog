@@ -31,4 +31,8 @@ pytest
 pytest-django
 
 
+# Background Process and Cache 
+celery
+Redis
+
 
