@@ -14,7 +14,6 @@ rest_framework_simplejwt
 drf-spectacular
 djangorestframework-simplejwt
 djoser
-locust
 django-cors-headers
 
 #deployment module
@@ -34,5 +33,5 @@ pytest-django
 # Background Process and Cache 
 celery
 Redis
-
-
+django-celery-beat
+django-redis
