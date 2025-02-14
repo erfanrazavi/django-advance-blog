@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "djoser",
     "corsheaders",
     "django_celery_beat",
-]   
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -61,7 +61,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -193,6 +192,7 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,  # به‌روزرسانی زمان آخرین ورود کاربر
 }
 
+
 # email configuration
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -205,9 +205,20 @@ EMAIL_PORT = 25
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Celery conf
-CELERY_BROKER_URL = 'redis://redis:6379/1'
-CELERY_RESULT_BACKEND = 'redis://redis:6379/1'    
+CELERY_BROKER_URL = "redis://redis:6379/1"
+CELERY_RESULT_BACKEND = "redis://redis:6379/1"
 
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_IGNORE_RESULT = False
 
+
+# caching conf
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}

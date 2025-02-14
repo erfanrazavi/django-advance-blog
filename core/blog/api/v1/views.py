@@ -1,3 +1,8 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page, never_cache
+from django.views.decorators.vary import vary_on_headers
+
+
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from rest_framework import viewsets
@@ -116,6 +121,7 @@ def postDetail(request , id):
 
 
 class PostModelViewSet(viewsets.ModelViewSet):
+
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     # lookup_field='id'
@@ -127,12 +133,43 @@ class PostModelViewSet(viewsets.ModelViewSet):
         "author": ["exact", "in"],
     }
     search_fields = ["title", "content"]
-    ordering_fields = ["-title", "id"]
-    ordering_fields = ["published_date"]
+    ordering_fields = ["-title", "id", "published_date"]
     pagination_class = DefaultPagination
+    import time
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(vary_on_headers("Authorization"))
+    def list(self, request, *args, **kwargs):
+        self.time.sleep(5)
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def retrieve(self, request, *args, **kwargs):
+        self.time.sleep(5)
+        return super().retrieve(request, *args, **kwargs)
+
+    @method_decorator(never_cache)
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @method_decorator(never_cache)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @method_decorator(never_cache)
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
 
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+
+    @method_decorator(cache_page(60 * 60))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 60))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
