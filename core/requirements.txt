@@ -17,7 +17,7 @@ djoser
 django-cors-headers
 
 #deployment module
-
+gunicorn
 
 
 #email third party module
@@ -35,3 +35,4 @@ celery
 Redis
 django-celery-beat
 django-redis
+
